@@ -17,9 +17,10 @@ public class MeteoDAO {
 		final String sql = "SELECT Localita, Data, Umidita FROM situazione ORDER BY data ASC";
 
 		List<Rilevamento> rilevamenti = new ArrayList<Rilevamento>();
+		Connection conn = ConnectDB.getConnection();
 
 		try {
-			Connection conn = ConnectDB.getConnection();
+			
 			PreparedStatement st = conn.prepareStatement(sql);
 
 			ResultSet rs = st.executeQuery();
@@ -42,12 +43,14 @@ public class MeteoDAO {
 
 	public List<Rilevamento> getAllRilevamentiLocalitaMese(int mese, Citta citta) {
 		
-		final String sql = "SELECT localita, data, umidita FROM situazione WHERE localita=? AND MONTH(data)=? ORDERD BY data ASC";
+		final String sql = "SELECT localita, data, umidita FROM situazione" + 
+				"WHERE localita=? AND MONTH(data)=?  ORDER BY data ASC";
 		
 		List<Rilevamento> rilevamenti = new ArrayList<Rilevamento>();
+		Connection conn = ConnectDB.getConnection();
 		
 		try {
-			Connection conn = ConnectDB.getConnection();
+			
 			PreparedStatement st = conn.prepareStatement(sql);
 			
 			st.setString(1,citta.getNome());
@@ -73,9 +76,10 @@ public class MeteoDAO {
 	public Double getUmiditaMedia(int mese, Citta citta) {
 		
 		final String sql = "SELECT AVG(Umidita) AS U FROM situazione WHERE localita=? AND MONTH(data)=?";
+		Connection conn = ConnectDB.getConnection();
 		
 		try {
-			Connection conn = ConnectDB.getConnection();
+			
 			PreparedStatement st = conn.prepareStatement(sql);
 			
 			st.setString(1, citta.getNome());
@@ -100,12 +104,13 @@ public class MeteoDAO {
 
 	public List<Citta> getAllCitta() {
 		
-		final String sql = "SELECT DISTINCT localita FROM situazione ORDERD BY localita";
+		final String sql = "SELECT DISTINCT localita FROM situazione ORDER BY localita";
 		
 		List<Citta> result = new ArrayList<Citta>();
+		Connection conn = ConnectDB.getConnection();
 		
 		try {
-		Connection conn = ConnectDB.getConnection();
+		
 		PreparedStatement st = conn.prepareStatement(sql);
 		
 		ResultSet rs = st.executeQuery();

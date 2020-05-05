@@ -67,15 +67,6 @@ public class FXMLController {
 
     }
     
-    public void setChoiseMese() {
-    	for(int mese=1; mese<=12; mese++) {
-    		boxMese.getItems().add(mese);
-    	}
-    }
-    
-    public void setModel(Model m) {
-    	this.model = m;
-    }
 
     @FXML
     void initialize() {
@@ -84,6 +75,17 @@ public class FXMLController {
         assert btnCalcola != null : "fx:id=\"btnCalcola\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
 
+    }
+    
+    public void setChoiseMese() {
+    	for(int mese=1; mese<=12; mese++) {
+    		boxMese.getItems().add(mese);
+    	}
+    }
+    
+    public void setModel(Model m) {
+    	this.model = m;
+    	setChoiseMese();
     }
 }
 
